@@ -1,4 +1,5 @@
 plugins {
+    id 'java'
     id 'application'
 }
 
@@ -7,11 +8,22 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation("org.seleniumhq.selenium:selenium-java:4.21.0")
+    testImplementation("org.testng:testng:7.11.0")
 }
 
 application {
     mainClass = 'org.example.Main'
+}
+test{
+    useTestNG()
+}
+jar{
+    manifest{
+        attributes(
+                'Main-Class':'org.example.Main'
+        )
+    }
 }
 tasks.register('prepareDocs', Copy) {
     description = 'Copies HTML, CSS, and images to the docs folder.'
